@@ -1,3 +1,10 @@
 IOTsink
 
 a Twisted Web server that acts as a message sink
+
+
+
+installation
+
+	- cp config.example.json config.json
+	- cp Router/routes.example.json routes.json
