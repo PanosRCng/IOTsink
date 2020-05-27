@@ -1,0 +1,20 @@
+{
+  "server":
+  {
+    "port": 8080
+  },
+  "databases":
+  {
+    "example_db": {
+      "host": "DATABASE_SERVER",
+      "user": "DATABASE_USER",
+      "password": "DATABASE_PASSWORD",
+      "db": "DATABASE_NAME",
+      "charset": "utf8"
+    }
+  },
+    "logging": {
+    "verbose": true,
+    "log_to_file": true
+  }
+}
