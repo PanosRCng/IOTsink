@@ -21,15 +21,11 @@ class ExampleDBAction(DBAction):
 
 
     def __insert_measurement(self, adapi_transaction, request):
-        parts = request['msg'].split(',')
-
-        temperature = parts[0].split(':')[1]
-        humidity = parts[1].split(':')[1]
 
         data = [
             request['client'],
-            temperature,
-            humidity,
+            request['msg']['Temperature'],
+            request['msg']['Humidity'],
             datetime.utcfromtimestamp(request['timestamp']).strftime('%Y-%m-%d %H:%M:%S')
         ]
 
