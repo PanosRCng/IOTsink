@@ -3,7 +3,7 @@
 
 server app that acts as a message sink
 
-fastapi app exosed on gunicorn running uvicorn workers
+fastapi app exposed on gunicorn running uvicorn workers
 
 
 ### test
