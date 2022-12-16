@@ -1,0 +1,18 @@
+{
+    "kafka": 
+    {
+      "bootstrap_servers": ["KAFKA_BOOTSTRAP_SERVERS", "['test_host:9092']"],
+      "topic": ["KAFKA_TOPIC", "dev_topic"],
+      "group_id": ["KAFKA_GROUP_ID", "dev_group"],
+      "producer_acks": ["KAFKA_PRODUCER_ACKS", 1],
+      "producer_retries": ["KAFKA_PRODUCER_RETRIES", 10],
+      "producer_batch_linger_ms": ["KAFKA_PRODUCER_BATCH_LINGER_MS", 0],
+      "producer_buffer_bytes": ["KAFKA_PRODUCER_BUFFER_BYTES", 33554432],
+      "producer_max_request_size": ["KAFKA_PRODUCER_MAX_REQUEST_SIZE", 1048576],
+      "consumer_timeout": ["KAFKA_CONSUMER_TIMEOUT", 9223372036854775807],
+      "consumer_auto_offset_reset": ["KAFKA_CONSUMER_AUTO_OFFSET_RESET", "latest"],
+      "consumer_auto_commit_interval_ms": ["KAFKA_CONSUMER_AUTO_COMMIT_INTERVAL_MS", 5000],
+      "consumer_enable_auto_commit": ["KAFKA_CONSUMER_ENABLE_AUTO_COMMIT", true],
+      "consumer_max_partition_fetch_bytes": ["KAFKA_CONSUMER_MAX_PARTITION_FETCH_BYTES", 1048576]
+    }
+  }

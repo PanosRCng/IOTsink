@@ -1,0 +1,44 @@
+{
+    "ExampleDBPlugin" :
+    {
+        "config":
+        {
+            "databases":
+            [
+                "dev_db"
+            ]
+        } 
+    },
+    "ExampleKafkaPlugin" :
+    {
+        "config": 
+        {
+            "topic": "dev_event_topic"
+        }
+    },
+    "ExampleRedisPlugin" :
+    {
+        "config":
+        {
+            "connections":
+            [
+                "dev"
+            ],
+            "expire_seconds": 60
+        }
+    },
+    "ExampleElasticsearchPlugin" :
+    {
+        "config":
+        {
+            "connections":
+            [
+                "dev"
+            ]
+        } 
+    },
+    "LoadTestPlugin" :
+    {
+        "config": {} 
+    }
+}

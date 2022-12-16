@@ -1,0 +1,11 @@
+{
+    "elasticsearch":
+    {
+      "test_connection": {
+        "host": ["ELASTICSEARCH_HOST", "test_host"],
+        "port": ["ELASTICSEARCH_PORT", 9200],
+        "scheme": ["ELASTICSEARCH_SCHEME", "http"],
+        "timeout": ["ELASTICSEARCH_TIMEOUT", 1]
+      }
+    }
+  }

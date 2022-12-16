@@ -1,0 +1,101 @@
+---
+kind: pipeline
+type: docker
+name: commit_lint
+
+steps:
+
+- name: commit lint
+  image: extenda/commitlint
+  commands:
+  - commitlint --from=HEAD~1
+
+
+---
+kind: pipeline
+type: docker
+name: test_build_publish_pipeline
+
+platform:
+  arch: amd64
+
+steps:
+
+- name: test
+  image: python:3.6.9-slim-buster
+  commands:
+  - pip install -r requirements.txt
+  - pip install pytest
+  - pytest -rA tests/
+
+- name: build
+  image: plugins/docker
+  settings:
+    insecure: true
+    registry: 101.0.0.1:5002
+    repo: 101.0.0.1:5002/test/iotsink
+    tags: latest
+
+depends_on:
+- commit_lint
+
+
+---
+kind: pipeline
+name: deploy_pipeline
+
+workspace:
+  path: WORKSPACE_PATH
+
+steps:
+- name: run_local
+  image: docker
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+  commands:
+  - docker pull 101.0.0.1:5002/test/iotsink
+  - if (docker ps -a | grep iotsink); then docker stop iotsink; fi
+  - docker run -d --rm -p 1095:8080 -e GUNICORN_CONF="gunicorn_conf.py" -v `pwd`/envs:/usr/src/app/envs/:ro -v `pwd`/logs:/usr/src/app/logs/:rw --user $(id -u ${USER}):$(id -g ${USER}) --name iotsink 101.0.0.1:5002/test/iotsink
+
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
+
+depends_on:
+- test_build_publish_pipeline
+
+
+---
+kind: pipeline
+name: load_test_pipeline
+
+steps:
+- name: smoke_test
+  image: locustio/locust
+  commands:
+    - locust --headless -f load_tests/smoke_test.py -H http://101.0.0.1:1095
+
+- name: load_test
+  image: locustio/locust
+  commands:
+    - locust --headless -f load_tests/load_test.py -H http://101.0.0.1:1095
+
+- name: stress_test
+  image: locustio/locust
+  commands:
+    - locust --headless -f load_tests/stress_test.py -H http://101.0.0.1:1095
+
+- name: spike_test
+  image: locustio/locust
+  commands:
+    - locust --headless -f load_tests/spike_test.py -H http://101.0.0.1:1095
+
+- name: soak_test
+  image: locustio/locust
+  commands:
+    - locust --headless -f load_tests/soak_test.py -H http://101.0.0.1:1095
+
+depends_on:
+- deploy_pipeline

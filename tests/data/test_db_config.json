@@ -1,0 +1,13 @@
+{
+    "databases":
+    {
+      "test_connection": {
+        "host": ["DATABASE_HOST", "test_host"],
+        "port": ["DATABASE_PORT", 3306],
+        "user": ["DATABASE_USER", "test_user"],
+        "password": ["DATABASE_PASSWORD", "test_password"],
+        "db": ["DATABASE_DB", "test_db"],
+        "charset": ["DATABASE_CHARSET", "test_charset"]
+      }
+    }
+  }

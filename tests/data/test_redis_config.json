@@ -1,0 +1,11 @@
+{
+    "redis":
+    {
+      "test_connection": {
+        "host": ["REDIS_HOST", "test_host"],
+        "port": ["REDIS_PORT", 6379],
+        "db": ["REDIS_DB", 0],
+        "timeout": ["REDIS_TIMEOUT", 1]
+      }
+    }
+  }

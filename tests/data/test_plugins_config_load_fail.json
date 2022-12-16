@@ -1,0 +1,9 @@
+{
+    "TestPlugin" :
+    {
+        "config":
+        {
+            "test_value": "test_value_wrong"
+        } 
+    }
+}
